@@ -1,13 +1,17 @@
 <ion-menu [content]="content">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
+    <ion-toolbar color="headerColor">
+      <ion-title >Menu</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content class="card-background-page">
+    <ion-card>
+      <img src="assets/img/card-saopaolo.png"/>
+    </ion-card>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon color="purple" [name]="p.icon" item-left></ion-icon>
         {{p.title}}
       </button>
     </ion-list>
