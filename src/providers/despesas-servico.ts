@@ -8,10 +8,14 @@ export class DespesasServico {
 
   urlDespesas:string;
   urlFuncoes:string;
+  urlOrgaos:string;
+
   constructor(public http: Http,public global: Mensagens) {
     console.log('Hello DespesasServico Provider');
     this.urlDespesas = 'https://gatewayapi.prodam.sp.gov.br:443/financas/orcamento/sof/v2.1.0/consultarDespesas';
     this.urlFuncoes = 'https://gatewayapi.prodam.sp.gov.br:443/financas/orcamento/sof/v2.1.0/consultarFuncoes';
+    this.urlOrgaos = 'https://gatewayapi.prodam.sp.gov.br:443/financas/orcamento/sof/v2.1.0/consultarOrgaos';
+
   }
 
   getDespesasProvider(params){
@@ -55,6 +59,24 @@ export class DespesasServico {
   }
 
 
+  getOrgaosProvider(anoParam){
+    console.log('Chegou no provider Orgaos: Ano ---' + anoParam);
+    let headers = new Headers({
+      'Content-Type': this.global.txtContentTyoe ,
+      'Authorization': this.global.txtToken
+    });
+    let options = new RequestOptions({ headers: headers });
 
+    return new Promise((resolve, reject) => {
+        console.log(this.urlOrgaos + '?' + anoParam);
+        this.http.get(this.urlOrgaos + '?' + anoParam, options)
+        .map(res => res.json())
+        .subscribe( data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+      });
+  }
 
 }

@@ -19,10 +19,9 @@ import { FormFaleConoscoPage } from '../pages/form-fale-conosco/form-fale-conosc
 import { DespesasPage } from '../pages/despesas/despesas';
 import { FuncoesPage } from '../pages/funcoes/funcoes';
 import { DespesafiltrosPage } from '../pages/despesafiltros/despesafiltros';
-//import '../pages/despesas/jsConvert.js';
-
-import { HomePageTestSQLite } from '../pages/homeTestSQLite/homePageTestSQLite';
 import { DaoPage } from '../pages/dao/dao';
+import { SetoresPage } from '../pages/setores/setores';
+//import '../pages/despesas/jsConvert.js';
 
 import { Utils } from '../global/util';
 
@@ -40,8 +39,8 @@ import { Utils } from '../global/util';
     DespesasPage,
     FuncoesPage,
     DespesafiltrosPage,
-    HomePageTestSQLite,
-    DaoPage
+    DaoPage,
+    SetoresPage
     ],
   imports: [
     BrowserModule,
@@ -64,15 +63,14 @@ import { Utils } from '../global/util';
     DespesasPage,
     FuncoesPage,
     DespesafiltrosPage,
-    HomePageTestSQLite,
-    DaoPage
+    DaoPage,  
+    SetoresPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Mensagens,
     Utils,
-    DaoPage,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -4,11 +4,12 @@ import { Chart } from 'chart.js';
 import { DespesasServico } from '../../providers/despesas-servico';
 import { DaoPage } from '../dao/dao';
 import { Utils } from '../../global/util';
+import { SetoresPage } from '../setores/setores';
 
 @Component({
   selector: 'page-funcoes',
   templateUrl: 'funcoes.html',
-  providers: [DespesasServico]
+  providers: [DespesasServico, DaoPage]
 })
 export class FuncoesPage {
   @ViewChild('doughnutCanvas') doughnutCanvas;
@@ -141,6 +142,14 @@ consultarDespesasFuncoes(anoParam, mesParam, codFuncao, fimExecucao, load){
 
 
 
+}
+
+
+openPageSetores(){
+  console.log(this.setorSelecionado);
+  this.navCtrl.push(SetoresPage, {
+      setorParam : this.setorSelecionado
+  });
 }
 
   consultarFuncoes(anoParam){

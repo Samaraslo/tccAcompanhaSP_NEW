@@ -60,7 +60,21 @@ export class DaoPage {
              console.log("ERROR: " + JSON.stringify(error.err));
          });
   }
+}
 
+  public insertOrgaos(retWS) {
+      console.log('insertOrgao');
+    for( let i = 0; i < retWS.lstOrgaos.length; i++){
+
+      console.log(retWS.lstOrgaos[i].codOrgao);
+      console.log(retWS.lstOrgaos[i].txtDescricaoOrgao);
+
+      this.db.executeSql("INSERT INTO tbOrgaos (codOrgao,descOrgao) VALUES ('" +retWS.lstOrgaos[i].codOrgao+"','"+retWS.lstOrgaos[i].txtDescricaoOrgao+"')", []).then((data) => {
+               console.log("INSERTED: " + JSON.stringify(data));
+           }, (error) => {
+               console.log("ERROR: " + JSON.stringify(error.err));
+           });
+    }
   }
 
 public readTbArea() {

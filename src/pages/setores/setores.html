@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="headerColor">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Setores</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+<ion-content >
+  <ion-list>
+    <ion-list-header style="padding: 0">
+      <img src="assets/img/imgSP.jpg"/>
+    </ion-list-header>
+    <ion-item *ngFor="let d of data" (click)="toggleDetails(d);consultarDespesas(myYear,myMonth,d.codOrgao);"  ><ion-icon style="padding: 0" color="primary" item-left [name]="d.icon"></ion-icon>
+      {{d.title}}
+      <div *ngIf="d.showDetails"><ion-icon style="padding: 0" color="primary" item-left name="logo-usd"></ion-icon>{{d.valLiquidado}}</div>
+      <div *ngIf="d.showDetails"><ion-icon style="padding: 0" color="primary" item-left name="people"></ion-icon>{{d.qtdHabitantes}}</div>
+      <div *ngIf="d.showDetails"><ion-icon style="padding: 0" color="primary" item-left name="cash"></ion-icon>{{d.total}}</div>
+
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+</ion-content>
