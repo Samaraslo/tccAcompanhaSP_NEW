@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-//import { Mensagens } from '../../global/mensagens';
+import { Mensagens } from '../../global/mensagens';
 //import { FormFaleConoscoPage } from '../form-fale-conosco/form-fale-conosco'
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-//  providers: [Mensagens]
+  providers: [Mensagens]
 
 })
 export class HomePage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-            //  public global: Mensagens,
+              public global: Mensagens,
               private alertCtrl: AlertController) {
 
 
@@ -22,8 +22,8 @@ export class HomePage {
   }
   openModalSobreApp(){
     let alert = this.alertCtrl.create({
-    //  title: this.global.msgTituloSobreOAPP,
-    //  subTitle: this.global.msgConteudoSobreOAPP,
+      title: this.global.msgTituloSobreOAPP,
+      subTitle: this.global.msgConteudoSobreOAPP,
       buttons: ['OK, entendi! :) ']
     });
     alert.present();

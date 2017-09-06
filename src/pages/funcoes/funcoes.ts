@@ -75,8 +75,8 @@ export class FuncoesPage {
                     ],
                     hoverBackgroundColor: [
                       'rgba(255, 99, 132, 0.5)',
-                      'rgba(54, 162, 235, 0.5)',
                       'rgba(255, 206, 86, 0.5)',
+                      'rgba(0, 150, 136, 0.5)',
                       'rgba(75, 192, 192, 0.5)',
                     ]
                 }]
@@ -148,7 +148,7 @@ consultarDespesasFuncoes(anoParam, mesParam, codFuncao, fimExecucao, load){
 openPageSetores(){
   console.log(this.setorSelecionado);
   this.navCtrl.push(SetoresPage, {
-      setorParam : this.setorSelecionado
+      setorParam : this.setorSelecionado.substring(0,2)
   });
 }
 
@@ -160,7 +160,7 @@ openPageSetores(){
 
         if (this.platform.is('cordova')) {
 
-          this.lstDBAreas = this.dao.readTbArea();
+          /*this.lstDBAreas = this.dao.readTbArea();
 
           if(this.lstDBAreas.length > 0){
 
@@ -182,7 +182,25 @@ openPageSetores(){
               console.log('2', error);
             })
 
-          }
+          }*/
+
+          this.despesasServico.getFuncoesProvider(strParam)
+          .then((res) => {
+
+            if (res) {
+              let retWS: any = {};
+              retWS = res;
+              for(var i = 0; i < retWS.lstFuncoes.length; i++) {
+                  this.lstDBAreas.push({codArea: retWS.lstFuncoes[i].codFuncao, descArea: retWS.lstFuncoes[i].txtDescricaoFuncao});
+              }
+
+              this.objFuncoes.lstFuncoes = this.lstDBAreas;
+
+            }
+
+          }, (error) => {
+            console.log('2', error);
+          })
 
         }else{
 ///console.log(retWS);

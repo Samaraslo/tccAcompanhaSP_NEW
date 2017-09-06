@@ -10,7 +10,7 @@ import { DaoPage } from '../dao/dao';
 @Component({
   selector: 'page-despesas',
   templateUrl: 'despesas.html',
-  providers: [DespesasServico]
+  providers: [DespesasServico, DaoPage]
 
 })
 export class DespesasPage {
@@ -136,19 +136,19 @@ export class DespesasPage {
           if (res) {
             console.log('this.platform.is()' + this.platform.is('cordova'));
             if (this.platform.is('cordova')) {
-              this.dao.insertRetDespesas(res);
+              //this.dao.insertRetDespesas(res);
               console.log('via celular');
             }else{
               console.log('via browser');
             }
 
-            if(this.util.primeiraVezNoAPP){
+            //if(this.util.primeiraVezNoAPP){
               //se é a primeira vez no app - a busca é realizada pelo WS
               this.objDespesas = res;
-            }else{
+            //}else{
               //caso contrário realiza consulta no BD.
-              this.objDespesas = this.dao.readDespesas();
-            }
+              //this.objDespesas = this.dao.readDespesas();
+            //}
 
             this.valOrcadoInicio = this.objDespesas.lstDespesas[0].valOrcadoInicial;
             this.valOrcadoAtual = this.objDespesas.lstDespesas[0].valOrcadoAtualizado;

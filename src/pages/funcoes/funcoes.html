@@ -8,7 +8,6 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Areas</h3>
       <canvas #doughnutCanvas></canvas>
 
       <ion-card>
@@ -61,8 +60,8 @@
   </ion-card-header>
   <ion-card-content style="padding: 0">
     <ion-item>
-    <ion-select placeholder="Selecione o setor" (ionChange)="openPageSetores()" [(ngModel)]="setorSelecionado">
-      <ion-option *ngFor="let setor of lstDBAreas">{{setor.descArea}}</ion-option>
+    <ion-select placeholder="Selecione o setor" style="max-width: 100% !important;" (ionChange)="openPageSetores()" [(ngModel)]="setorSelecionado">
+      <ion-option *ngFor="let setor of lstDBAreas"  >{{setor.codArea}} - {{setor.descArea}}</ion-option>
     </ion-select>
   </ion-item>
   </ion-card-content>

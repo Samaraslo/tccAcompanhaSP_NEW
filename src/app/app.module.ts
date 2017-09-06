@@ -63,7 +63,7 @@ import { Utils } from '../global/util';
     DespesasPage,
     FuncoesPage,
     DespesafiltrosPage,
-    DaoPage,  
+    DaoPage,
     SetoresPage
   ],
   providers: [

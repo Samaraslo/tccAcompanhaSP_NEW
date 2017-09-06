@@ -11,8 +11,9 @@ import { Page2 } from '../pages/page2/page2';
 import { Mensagens } from '../global/mensagens';
 import { DespesasPage } from '../pages/despesas/despesas';
 import { FuncoesPage } from '../pages/funcoes/funcoes';
+import { SQLite,SQLiteObject } from '@ionic-native/sqlite';
 
- 
+
 
 @Component({
   templateUrl: 'app.html',
@@ -40,11 +41,11 @@ export class MyApp {
 
           //Despesa por area e subarea
           {icon: this.icons[2], title: 'Despesas', component: DespesasPage },
-          {icon: this.icons[3], title: 'Despesas por área', component: FuncoesPage },
-          {icon: this.icons[4], title: 'Despesas por orgão', component: Credores },
-          {icon: this.icons[5], title: 'Despesas por programa', component: Page2 },
+          {icon: this.icons[3], title: 'Setores', component: FuncoesPage },
+          {icon: this.icons[4], title: 'Despesas por orgão', component: Credores }
+        /*  {icon: this.icons[5], title: 'Despesas por programa', component: Page2 },
           {icon: this.icons[6], title: 'Despesas por grupos', component: Page2 },
-          {icon: this.icons[7], title: 'Pesquisa Avançada', component: Page2 }
+          {icon: this.icons[7], title: 'Pesquisa Avançada', component: Page2 }*/
         ];
 
 
@@ -56,6 +57,68 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      let db = new SQLite();
+    db.create({
+              name: "dbAcompanhaSP.db",
+              location: "default"
+    }).then((db: SQLiteObject) => {
+
+            db.executeSql("CREATE TABLE IF NOT EXISTS tbSubprefeitura (codigo TEXT PRIMARY KEY, nome TEXT, qtdHabitantes INTEGER);" , {}).then((data) => {
+
+              db.executeSql("SELECT * FROM tbSubprefeitura", []).then((data) => {
+
+                  if(data.rows.length > 0) {
+                      console.log("Tabela já carregada com " + data.rows.length + " registros");
+                  }else{
+                    db.executeSql("INSERT INTO tbSubprefeitura VALUES ('55','JABAQUARA',213862);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('63','SÃO MIGUEL PAULISTA',410514);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('66','ARICANDUVA/FORMOSA/CARRÃO',258203); " +
+                                  "INSERT INTO tbSubprefeitura VALUES ('50','BUTANTA',384069); " +
+                                  "INSERT INTO tbSubprefeitura VALUES ('57','CAMPO LIMPO',578857); " +
+                                  "INSERT INTO tbSubprefeitura VALUES ('44','CASA VERDE/CACHOEIRINHA',313026); " +
+                                  "INSERT INTO tbSubprefeitura VALUES ('56','CIDADE ADEMAR',402713); " +
+                                  "INSERT INTO tbSubprefeitura VALUES ('71','CIDADE TIRADENTES',242077); " +
+                                  "INSERT INTO tbSubprefeitura VALUES ('48','LAPA',255185); " +
+                                  "INSERT INTO tbSubprefeitura VALUES ('68','GUAIANASES',291193); " +
+                                  "INSERT INTO tbSubprefeitura VALUES ('46','JAÇANÃ-TREMEMBÉ- PR-JT',276628);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('51','PINHEIROS',233563);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('69','VILA PRUDENTE',224695);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('62','ERMELINO MATARAZZO',210709);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('43','FREGUESIA/BRASILANDIA',407245);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('53','IPIRANGA',429299);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('64','ITAIM PAULISTA',399140);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('67','ITAQUERA',525337);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('58','M´BOI MIRIM',544446);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('65','MOOCA',286598);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('60','PARELHEIROS',148239);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('61','PENHA',476489);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('41','PERUS',148226);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('42','PIRITUBA/JARAGUÁ'',442722);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('45','SANTANA/TUCURUVI',304062);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('54','SANTO AMARO',207421);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('70','SÃO MATEUS',436329);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('72','SAPOPEMBA',295975);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('49','SÉ'',324597);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('59','SOCORRO',672901);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('47','VILA MARIA/ VILA GUILHERME',287866);" +
+                                  "INSERT INTO tbSubprefeitura VALUES ('52','VILA MARIANA',294627);", {}).then((data) => {
+
+                       }, (error) => {
+                          console.log('Component Erro 1 ' + error);
+                       })
+                  }
+              }, (error) => {
+                console.log('Component Erro 2 ' + error);
+              });
+
+            }, (error) => {
+              console.log('Component Erro 3 ' + error);
+            })
+    }, (error) => {
+      console.log('Component Erro 4 ' + error);
+    });
+
     });
   }
 
